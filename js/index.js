@@ -32,6 +32,61 @@ const app = (difficulty) => {
   let score = 0
   let isGameOver = false
   let requestAnimationId = null
+
+  const showGameOver = () => {
+    cancelAnimationFrame(requestAnimationId)
+    isGameOver = true
+    showGameMessage(context, canvas, 'GAME OVER!')
+  }
+
+  function createTetromino() {
+    if (tetrominoOrder.length === 0) {
+      tetrominoOrder = ['I', 'J', 'L', 'O', 'S', 'T', 'Z']
+      shuffle(tetrominoOrder)
+    }
+
+    const name = tetrominoOrder.pop()
+    const matrix = tetrominoItems[name]
+    const col = playArea[0].length / 2 - Math.ceil(matrix[0].length / 2)
+    const row = name === 'I' ? -1 : -2
+
+    return {
+      name,
+      matrix,
+      row,
+      col,
+    }
+  }
+
+  const placeTetromino = () => {
+    for (let row = 0; row < tetromino.matrix.length; row++) {
+      for (let col = 0; col < tetromino.matrix[row].length; col++) {
+        if (tetromino.matrix[row][col]) {
+          if (tetromino.row + row < 0) {
+            return showGameOver()
+          }
+
+          playArea[tetromino.row + row][tetromino.col + col] = tetromino.name
+        }
+      }
+    }
+
+    for (let row = playArea.length - 1; row > 0; ) {
+      if (playArea[row].every((cell) => !!cell)) {
+        for (let r = row; r >= 0; r--) {
+          for (let col = 0; col < playArea[r].length; col++) {
+            playArea[r][col] = playArea[r - 1][col]
+          }
+        }
+
+        scoreBlock.innerHTML = score += 5
+      } else {
+        row--
+      }
+    }
+
+    tetromino = createTetromino()
+  }
 }
 
 createGameMenu(app)
