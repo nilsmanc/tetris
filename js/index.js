@@ -87,6 +87,56 @@ const app = (difficulty) => {
 
     tetromino = createTetromino()
   }
+
+  const game = () => {
+    showNextTetromino(tetrominoOrder[tetrominoOrder.length - 1])
+    requestAnimationId = requestAnimationFrame(game)
+    context.clearRect(0, 0, canvas.clientWidth, canvas.height)
+
+    for (let row = 0; row < 20; row++) {
+      for (let col = 0; col < 10; col++) {
+        if (playArea[row][col]) {
+          const name = playArea[row][col]
+          context.fillStyle = colors[name]
+          context.fillRect(
+            col * squareSize,
+            row * squareSize,
+            squareSize - 1,
+            squareSize - 1
+          )
+        }
+      }
+    }
+
+    if (tetromino) {
+      if (++count > difficulty) {
+        tetromino.row++
+        count = 0
+      }
+
+      if (
+        !isValidPos(tetromino.matrix, tetromino.row, tetromino.col, playArea)
+      ) {
+        tetromino.row--
+        placeTetromino()
+      }
+
+      context.fillStyle = colors[tetromino.name]
+
+      for (let row = 0; row < tetromino.matrix.length; row++) {
+        for (let col = 0; col < tetromino.matrix[row].length; col++) {
+          if (tetromino.matrix[row][col]) {
+            context.fillRect(
+              (tetromino.col + col) * squareSize,
+              (tetromino.row + row) * squareSize,
+              squareSize - 1,
+              squareSize - 1
+            )
+          }
+        }
+      }
+    }
+  }
 }
 
 createGameMenu(app)
