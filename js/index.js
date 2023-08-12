@@ -137,6 +137,38 @@ const app = (difficulty) => {
       }
     }
   }
+  document.addEventListener('keydown', (e) => {
+    if (isGameOver) return
+
+    if (e.which === 40) {
+      rapidFallOnDown(tetromino, playArea, placeTetromino)
+    }
+
+    if (e.which === 38) {
+      rotateOnClickUp(tetromino, playArea)
+    }
+
+    if (e.which === 39) {
+      moveOnClickRight(tetromino, playArea)
+    }
+
+    if (e.which === 37) {
+      moveOnClickLeft(tetromino, playArea)
+    }
+  })
+
+  topArrow.addEventListener('click', () => rotateOnClickUp(tetromino, playArea))
+  bottomArrow.addEventListener('click', () =>
+    rapidFallOnDown(tetromino, playArea, placeTetromino)
+  )
+  leftArrow.addEventListener('click', () =>
+    moveOnClickLeft(tetromino, playArea)
+  )
+  rightArrow.addEventListener('click', () =>
+    moveOnClickRight(tetromino, playArea)
+  )
+
+  addHoverForButtons()
 }
 
 createGameMenu(app)
