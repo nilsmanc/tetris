@@ -157,6 +157,23 @@ const app = (difficulty) => {
     }
   })
 
+  startBtn.addEventListener('click', () => {
+    requestAnimationId = requestAnimationFrame(game)
+    startBtn.disabled = true
+    pauseBtn.disabled = false
+  })
+
+  pauseBtn.addEventListener('click', () => {
+    cancelAnimationFrame(requestAnimationId)
+    showGameMessage(context, canvas, 'PAUSED')
+    pauseBtn.disabled = true
+    startBtn.disabled = false
+  })
+
+  restartBtn.addEventListener('click', () => {
+    window.location.reload()
+  })
+
   topArrow.addEventListener('click', () => rotateOnClickUp(tetromino, playArea))
   bottomArrow.addEventListener('click', () =>
     rapidFallOnDown(tetromino, playArea, placeTetromino)
@@ -172,3 +189,5 @@ const app = (difficulty) => {
 }
 
 createGameMenu(app)
+
+window.addEventListener('resize', tetrisResize)
