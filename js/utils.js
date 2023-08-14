@@ -14,6 +14,13 @@ export const shuffle = (array) => {
   return array
 }
 
+const rotate = (matrix) => {
+  const N = matrix.length - 1
+  const result = matrix.map((row, i) => row.map((val, j) => matrix[N - j][i]))
+
+  return result
+}
+
 export const isValidPos = (tetromino, tetrominoRow, tetrominoCol, playArea) => {
   for (let row = 0; row < tetromino.length; row++) {
     for (let col = 0; col < tetromino[row].length; col++) {
@@ -42,4 +49,24 @@ export const showGameMessage = (context, canvas, text) => {
   context.textAlign = 'center'
   context.textBaseline = 'middle'
   context.fillText(text, canvas.width / 2, canvas.height / 2)
+}
+
+export const rapidFallOnDown = (tetromino, playArea, placeTetromino) => {
+  const row = tetromino.row + 1
+
+  if (!isValidPos(tetromino.matrix, row, tetromino.col, playArea)) {
+    tetromino.row = row - 1
+    placeTetromino()
+    return
+  }
+
+  tetromino.row = row
+}
+
+export const rotateOnClickUp = (tetromino, playArea) => {
+  const matrix = rotate(tetromino.matrix)
+
+  if (isValidPos(matrix, tetromino.row, tetromino.col, playArea)) {
+    tetromino.matrix = matrix
+  }
 }
