@@ -70,3 +70,19 @@ export const rotateOnClickUp = (tetromino, playArea) => {
     tetromino.matrix = matrix
   }
 }
+
+export const moveOnClickRight = (tetromino, playArea) => {
+  const col = tetromino.col + 1
+
+  if (isValidPos(tetromino.matrix, tetromino.row, col, playArea)) {
+    tetromino.col = col
+  }
+}
+
+export const moveOnClickLeft = (tetromino, playArea) => {
+  const col = tetromino.col - 1
+
+  if (isValidPos(tetromino.matrix, tetromino.row, col, playArea)) {
+    tetromino.col = col
+  }
+}
