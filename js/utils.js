@@ -114,3 +114,17 @@ export const showNextTetromino = (name) => {
       break
   }
 }
+
+export const tetrisResize = () => {
+  const content = document.querySelector('.game-content')
+
+  if (window.screen.width < 630 && window.screen.width > 500) {
+    content.style.transform = 'scale(1.3)'
+  } else if (window.screen.width < 500 && window.screen.width > 380) {
+    content.style.transform = 'scale(1.5)'
+  } else if (window.screen.width < 380) {
+    content.style.transform = 'scale(1.8)'
+  } else {
+    content.style.transform = 'scale(1)'
+  }
+}
