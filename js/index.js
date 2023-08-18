@@ -1,4 +1,18 @@
-import { createGameMenu } from './gameMenu'
+import { tetrisContent } from './gameContents.js'
+import { createGameMenu } from './gameMenu.js'
+import { addHoverForButtons } from './sketchBtn.js'
+import { colors, tetrominoItems } from './tetrominoItems.js'
+import {
+  isValidPos,
+  moveOnClickLeft,
+  moveOnClickRight,
+  rapidFallOnDown,
+  rotateOnClickUp,
+  showGameMessage,
+  showNextTetromino,
+  shuffle,
+  tetrisResize,
+} from './utils.js'
 
 const app = (difficulty) => {
   const gameContent = document.querySelector('.game-content')
@@ -137,6 +151,7 @@ const app = (difficulty) => {
       }
     }
   }
+
   document.addEventListener('keydown', (e) => {
     if (isGameOver) return
 
@@ -190,4 +205,5 @@ const app = (difficulty) => {
 
 createGameMenu(app)
 
+tetrisResize()
 window.addEventListener('resize', tetrisResize)
