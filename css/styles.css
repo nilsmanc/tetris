@@ -1,5 +1,9 @@
+@import url('./sketchBtn.css');
+@import url('./gameMenu.css');
+@import url('./tetromino.css');
+
 body {
-  background-image: url(../img/background.jpg);
+  background-image: url('../img/background.jpg');
   background-size: cover;
   background-position: center center;
   display: flex;
@@ -14,7 +18,7 @@ body {
   box-sizing: border-box;
 }
 
-.game-content_inner {
+.game-content__inner {
   display: flex;
   align-items: flex-start;
   height: 100%;
@@ -29,6 +33,12 @@ body {
   color: #fff;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #bc13fe,
     0 0 82px #bc13fe, 0 0 92px #bc13fe, 0 0 102px #bc13fe, 0 0 151px #bc13fe;
+}
+
+.canvas-bg {
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-right: 15px;
+  width: 320px;
 }
 
 canvas {
