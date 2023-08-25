@@ -1,9 +1,9 @@
 export const menuContent = `
 <div class="game-menu">
-    <span>СЛОЖНОСТЬ</span>
-    <button class="sketch-button easy">ЛЕГКО</button>
-    <button class="sketch-button norm">НОРМАЛЬНО</button>
-    <button class="sketch-button hard">СЛОЖНО</button>
+    <span>DIFFICULTY</span>
+    <button class="sketch-button easy">EASY</button>
+    <button class="sketch-button norm">NORMAL</button>
+    <button class="sketch-button hard">HARD</button>
 </div>`
 
 export const tetrisContent = `
